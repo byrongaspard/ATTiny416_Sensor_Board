@@ -1,0 +1,50 @@
+***********************************************************
+*
+* BAT160C
+*
+* Nexperia
+*
+* Schottky barrier double diodes
+* IFmax = 1A
+* VRmax = 60V
+* VFmax = 850mV    @ IF = 2A
+* IRmax = 350µA    @ VR = 60V
+* 
+*
+* Package pinning does not match Spice model pinning.
+* Package: SOT223
+*
+* Package Pin 1: Anode         D1
+* Package Pin 2: Not Connected
+* Package Pin 3: Anode         D2
+* Package Pin 4: Cathode       D1;D2
+*
+*
+* Extraction date (week/year): #
+* Simulator: PSPICE
+*
+***********************************************************
+*
+* The resistor R1  
+* does not reflect physical devices 
+* but improve only modeling in the 
+* reverse mode of operation.
+*
+.SUBCKT BAT160C 1 2
+R1 1 2 1E+7
+D1 1 2 BAT160C
+*
+.MODEL BAT160C D
++ IS = 5E-7
++ N = 0.9751
++ BV = 66
++ IBV = 0.0004
++ RS = 0.3422
++ CJO = 1.75E-10
++ VJ = 0.3761
++ M = 0.4725
++ FC = 0.5
++ EG = 0.69
++ XTI = 2
+.ENDS
+*

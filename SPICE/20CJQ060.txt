@@ -1,0 +1,10 @@
+.MODEL M_20CJQ060 D (
++AREA     = 0.995129       LEVEL    = 1              IS       = 4.99648e-10    
++ISW      = 1e-18          RS       = 0.150933       N        = 0.63219        
++BV       = 63             IBV      = 5e-05          CJO      = 1.38e-10       
++VJ       = 0.300001       MJ       = 0.427386       FC       = 0.5            
++CJSW     = 1e-10          VJSW     = 0.8            MJSW     = 0.5            
++FCSW     = 0.5            AF       = 1              XTI      = 3.99919        
++EG       = 0.530352       TRS1     = 1e-11          TRS2     = 2.42302e-05    
++ISR      = 1.24773e-07    IK       = 0.00690101     NR       = 1.55693        
++KF       = 0              TNOM     = 27             TT       = 0 )
