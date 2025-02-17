@@ -166,6 +166,9 @@
         <property key="user-pack-device-support" value=""/>
         <property key="wpo-lto" value="false"/>
       </XC8-config-global>
+      <mEdbgTool>
+        <property key="debugoptions.useswbreakpoints" value="true"/>
+      </mEdbgTool>
     </conf>
   </confs>
 </configurationDescriptor>

@@ -21,3 +21,4 @@ nbproject/Makefile-*
 disassembly/
 .generated_files/
 *.map
+defmplabxtrace.*
