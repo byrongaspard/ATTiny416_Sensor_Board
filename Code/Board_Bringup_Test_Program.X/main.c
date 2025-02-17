@@ -94,7 +94,7 @@ void send_uart_ascii_hex_byte(uint8_t byte);
 void main(void) 
 {
     // Test recording array
-    uint8_t test_arr[] = {1, 2, 3, 4};
+    uint8_t test_arr[] = {1, 2, 3, 99};
     
     // Initialize everything
     initialize_clock();
@@ -130,15 +130,9 @@ void main(void)
         if(GET_BIT(PORTA.IN, 6))
         {
             W25X20L_write_enable();
-            send_uart_string("PA6 is HIGH. Recording Data. \n");
+            //send_uart_string("PA6 is HIGH. Recording Data. \n");
             W25X20L_write_data(test_arr, sizeof(test_arr)/sizeof(test_arr[0]));
             test_arr[0]++;
-            
-            send_uart_string("\ncur_spi_write_addr = 0x");
-            send_uart_ascii_hex_byte(((cur_spi_write_addr) >> 16) & 0xFF);
-            send_uart_ascii_hex_byte(((cur_spi_write_addr) >> 8) & 0xFF);
-            send_uart_ascii_hex_byte(((cur_spi_write_addr) >> 0) & 0xFF);
-            send_uart_string("\n");
         }
         
         //_delay_ms(1000);
@@ -396,12 +390,9 @@ void W25X20L_find_uninitialized_memory(void)
 }
 
 void W25X20L_write_data(uint8_t *data, uint8_t num_bytes)
-{
-    
-    volatile uint32_t addr = cur_spi_write_addr;
-    
+{    
     // Check that there is enough memory to write the data.
-    if((cur_spi_write_addr + num_bytes) > W25X20L_END_ADDR)
+    if((cur_spi_write_addr + num_bytes) > W25X20L_END_ADDR + 1)
     {
         send_uart_string("Aborting W25X20L write... not enough memory left\n");
         return;
@@ -443,6 +434,8 @@ void W25X20L_write_data(uint8_t *data, uint8_t num_bytes)
 void W25X20L_dump_flash_to_uart(void)
 {
     uint32_t cur_addr = W25X20L_START_ADDR;
+    uint8_t cur_byte = 0x00;
+    uint8_t checksum = 0x00;
     
     /* Wait until the chip is ready */
     while(GET_BIT(W25X20L_get_status_reg(), W25X20L_STATUS_REG_BUSY_BIT)) _delay_us(1);
@@ -469,11 +462,17 @@ void W25X20L_dump_flash_to_uart(void)
                 send_uart_ascii_hex_byte(((cur_addr + cur_page_byte) >> 0) & 0xFF);
                 send_uart_string(": ");
             }
-            send_uart_ascii_hex_byte(spi_transfer(0x00));
+            cur_byte = spi_transfer(0x00);
+            checksum += cur_byte;
+            send_uart_ascii_hex_byte(cur_byte);
         }
         
         set_spi_cs(DEASSERT_SELECT);
     }
+    
+    send_uart_string("\n\n8-Bit Two's Compliment Checksum: 0x");
+    send_uart_ascii_hex_byte(~checksum + 1);
+    send_uart_string("\n");
 }
 
 /***** USART Helper Functions ******/
