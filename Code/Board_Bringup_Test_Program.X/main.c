@@ -141,7 +141,7 @@ void main(void)
             send_uart_string("\n");
         }
         
-        _delay_ms(1000);
+        //_delay_ms(1000);
     }
     return;
 }
@@ -448,7 +448,7 @@ void W25X20L_dump_flash_to_uart(void)
     while(GET_BIT(W25X20L_get_status_reg(), W25X20L_STATUS_REG_BUSY_BIT)) _delay_us(1);
   
     // Dump one page at a time
-    for(uint32_t cur_page = 0; cur_page < 4 /*W25X20L_NUM_PAGES*/; cur_page++)
+    for(uint32_t cur_page = 0; cur_page < W25X20L_NUM_PAGES; cur_page++)
     {
         cur_addr = W25X20L_START_ADDR + (cur_page * W25X20L_PAGE_BYTES);
         
