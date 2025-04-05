@@ -37,8 +37,10 @@ The power design needed to provide the following features:
 - Provide a minimum of 50mA @ 3.3V whenver at least one input power is present
     - Provide uninterrupted power when transitioning from multiple input power sources to a single input power source
  
-A Low Dropout (LDO) linear regulator was selected as the design as the microcontroller, SPI flash, and USB to USART preipherals are all relatively power devices and LDOs are easy to implement relative to switchers. 
+The TPS7B6933 LDO linear regulator was selected to generate the 3.3V rail as the microcontroller, SPI flash, and USB to USART preipherals are all relatively power devices and LDOs are among the simplest power supply designs to implement.
+The TPS7B6933 can accept up to 40V (45V transient) of input voltage. The LDO is rated to provdie 150 mA of output current with a 14V input power source, therfore the maximum output current at 30V can be approximated to 75 mA, thus meeting the requirement.
 
+The simplest way to accept multiple power sources while precluding backfeeding of power would he a diode OR. This was considered, not feasbile for this design. The TPS7B6933's 
 
 
 ![LTSpice Schematic](Pictures/Power_OR_SPICE_Schematic.png)
@@ -50,9 +52,9 @@ A Low Dropout (LDO) linear regulator was selected as the design as the microcont
 The FT230 was selected to provide the USB to UART interface. This FTDI chip was chosen primarily for it's price. 
 The FT230 datasheet recommended input USB data line filtering capacitors and termination resistors which were added to the design. LEDs were also added to CBUS1/2 on the FT230 to serve as Tx/Rx indicators.
 
-The FT230 uses 5V logic levels on the USB inputs to comply with USB standards, but the UART output logic levels are configurable from 1.8-3.3V via the VCCIO input. The FT230 includes an internal 3.3V LDO on the 3V3OUT pin that can be connected directly to the VCCIO pin to provide the required 3.3V output logic levels. However, it is possible that the FT230's 3.3V regulator is outputting a higher voltage that the circuit card's main TPS7B6933DBVR LDO. Therfore, the output of the design's main 3.3V LDO (TPS7B6933DBVR) was connected to the FT230's VCCIO input, instead of connecting the FT230's 3V3OUT.
+The FT230 uses 5V logic levels on the USB inputs to comply with USB standards, but the UART output logic levels are configurable from 1.8-3.3V via the VCCIO input. The FT230 includes an internal 3.3V LDO on the 3V3OUT pin that can be connected directly to the VCCIO pin to provide the required 3.3V output logic levels. However, it is possible that the FT230's 3.3V regulator is outputting a higher voltage that the circuit card's main TPS7B6933 LDO. Therfore, the output of the design's main 3.3V LDO (TPS7B6933) was connected to the FT230's VCCIO input, instead of connecting the FT230's 3V3OUT.
 
-Jumper resistors were included between the ATTiny416 and FT230 to support isolating the components if needed for debugging. Jumper resistors were also added to allow the FT230's 3V3OUT to be connected to VCCIO instead of TPS7B6933DBVR if needed.
+Jumper resistors were included between the ATTiny416 and FT230 to support isolating the components if needed for debugging. Jumper resistors were also added to allow the FT230's 3V3OUT to be connected to VCCIO instead of TPS7B6933 if needed.
 
 ### SPI Flash
 
