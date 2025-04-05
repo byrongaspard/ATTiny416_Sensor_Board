@@ -1,4 +1,4 @@
-# ATTiny416 Sensor Board
+# ATTiny416 Dev Board
 
 This project is my first attempt at embedded hardware/software design where I layout/route a custom PCB. In my professional career, I have done schematic capture, integrated Arduino and Raspberry Pi like development boards into custom solutions, and developed embedded software, but this will be my first time laying out a custom circuit card.
 
