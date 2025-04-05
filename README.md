@@ -61,6 +61,8 @@ The colors in the time-base results that follow correspond to the following meas
 
 Jumper resistors were also included in the design to allow the power diode to be reconfigured or bypassed entirely.
 
+![Power Schematic](Pictures/Schematic_Power.png)
+
 ### USB to UART
 
 The FT230 was selected to provide the USB to UART interface. This FTDI chip was chosen primarily for it's price. 
@@ -72,7 +74,11 @@ Jumper resistors were included between the ATTiny416 and FT230 to support isolat
 
 The 5V USB power that is accepted on the mini-B USB input is also fused before being utilized/regulated by the TPS7B6933. 
 
+![Power Schematic](Pictures/Schematic_UART.png)
+
 ### SPI Flash
+
+![Power Schematic](Pictures/Schematic_SPI_Flash.png)
 
 ### PCB Design, Layout, and Manufacture
 
