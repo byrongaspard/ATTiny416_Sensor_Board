@@ -23,6 +23,10 @@ The following image is the of the final board. The sections that follow will des
 
 ## Hardware Design
 
+The first step in hardware design was selecting a microcontroller. I chose the ATTiny416 because of its interesting formfactor. It comes in a very small (3x3mm) VQFN package while still providing a lot of the common/core Atmel peripherals found on larger microcontrollers. This microcontroller also supports multiple logic levels, including 3.3V. The ATTiny416 is also very easy to integrate into a design as it requires almost no supporting peripheral hardware. 
+
+I purchased an [ATTiny416 XPLAINED NANO](https://www.microchip.com/en-us/development-tool/attiny416-xnano) development board to support initial software development while I was waiting for my PCB to be manufactured. I would also modify this board later to act as an external programmer for the ATTiny416 on my custom circuit card. 
+
 ### Power OR Spice Modeling
 
 ![LTSpice Schematic](Pictures/Power_OR_SPICE_Schematic.png)
@@ -45,4 +49,7 @@ The following image is the of the final board. The sections that follow will des
 
 ![Erasing](Pictures/Erase_Flash.png)
 
+## Uncompleted Work
 
+The following still needs to be completed on this project:
+- Test the external 32kHz crystal oscilator
