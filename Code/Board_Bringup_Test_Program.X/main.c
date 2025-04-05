@@ -313,6 +313,9 @@ void W25X20L_write_enable(void)
 
 void W25X20L_chip_erase(void)
 {
+    // Enable writes.
+    W25X20L_write_enable();
+    
     // Wait until the chip is ready.
     while(GET_BIT(W25X20L_get_status_reg(), W25X20L_STATUS_REG_BUSY_BIT)) _delay_us(1);
     
@@ -320,11 +323,11 @@ void W25X20L_chip_erase(void)
     set_spi_cs(ASSERT_SELECT);
     spi_transfer(W25X20L_CHIP_ERASE);
     set_spi_cs(DEASSERT_SELECT);
-    
+
     // Poll the status register until the erase is complete as indicated by the BUSY bit.
      while(GET_BIT(W25X20L_get_status_reg(), W25X20L_STATUS_REG_BUSY_BIT))
      {
-         _delay_ms(10);
+         _delay_ms(100);
         send_uart_string("Erasing...\n");
      }
     
@@ -395,6 +398,7 @@ void W25X20L_write_data(uint8_t *data, uint8_t num_bytes)
     if((cur_spi_write_addr + num_bytes) > W25X20L_END_ADDR + 1)
     {
         send_uart_string("Aborting W25X20L write... not enough memory left\n");
+        while(1);
         return;
     }
     // CHeck that the write does not cross page boundaries.
