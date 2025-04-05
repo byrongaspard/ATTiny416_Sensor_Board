@@ -22,3 +22,4 @@ disassembly/
 .generated_files/
 *.map
 defmplabxtrace.*
+queuelogs/
