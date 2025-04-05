@@ -1,8 +1,16 @@
 # ATTiny416_Sensor_Board
 
-This project is my first attempt at embedded hardware/software design where I capture schematics, layout/route a custom PCB, and write software to test it all. In my senior design project and professional career, I have integrated Arduino and Raspberry Pi “like” development boards into custom solutions, but this is my first design creating an embedded design from scratch.
+This project is my first attempt at embedded hardware/software design where I layout/route a custom PCB. In my professional career, I have done schematic capture, integrated Arduino and Raspberry Pi like development boards into custom solutions, and developed embedded software before, but this will be my first time laying out a custom circuit card.
 
-There were no real requirements or objectives with this design as the primary objective was to learn how to layout a PCB using KiCad. However, to make the design process a little more interesting than just an “Arduino”, I decided I wanted my board to have the following features:
+There were no real requirements for this design as the primary objective was to learn how to layout a PCB using KiCad. However, to make the design process a little more interesting than just a custom “Arduino”, I decided I wanted my board to have the following features:
+
+-	UART communication to/from the microcontroller 
+-	3.3V microcontroller (instead of 5V)
+-	Includes SPI flash for recording data
+-	Accepts/regulates power from multiple inputs:
+    - 5 V from USB
+    - 30V from an external power source
+
 
 ![Board Front](Pictures/Board_Front.png)
 
