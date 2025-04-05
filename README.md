@@ -70,7 +70,7 @@ The FT230 uses 5V logic levels on the USB inputs to comply with USB standards, b
 
 Jumper resistors were included between the ATTiny416 and FT230 to support isolating the components if needed for debugging. Jumper resistors were also added to allow the FT230's 3V3OUT to be connected to VCCIO instead of TPS7B6933 if needed.
 
-The 5V USB power that is accepted on the mini-B USB input is also fused before being utilized/regulated. 
+The 5V USB power that is accepted on the mini-B USB input is also fused before being utilized/regulated by the TPS7B6933. 
 
 ### SPI Flash
 
