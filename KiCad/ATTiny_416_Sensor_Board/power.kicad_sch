@@ -7,7 +7,7 @@
 	(title_block
 		(title "ATTiny416 Development Board")
 		(date "2025-02-09")
-		(rev "1")
+		(rev "2")
 	)
 	(lib_symbols
 		(symbol "2025-02-01_16-45-29:DZDH0401DW-7"

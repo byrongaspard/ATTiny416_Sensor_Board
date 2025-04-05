@@ -7,20 +7,9 @@
 	(title_block
 		(title "ATTiny416 Development Board")
 		(date "2025-02-09")
-		(rev "1")
+		(rev "2")
 	)
 	(lib_symbols)
-	(text "Add 3.3 V regulator\nAdd external GPIO Control - Switch to pulldown at startup."
-		(exclude_from_sim no)
-		(at 25.146 29.21 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "4ec7a189-4028-41b1-8c13-d7acbb757af0")
-	)
 	(sheet
 		(at 121.92 106.68)
 		(size 57.15 31.75)
