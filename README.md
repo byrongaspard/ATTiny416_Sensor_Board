@@ -88,6 +88,14 @@ The 5V USB power that is accepted on the mini-B USB input is also fused before b
 
 ## Software Design
 
+The objective of the software design was to verify the functionality of all hardware design. To accomplish this, test software was written that provides the following functionality:
+
+- Write a known pattern of data to SPI Flash
+- Provide an external command to export the contents of SPI Flash
+- Provide an external command to erase the SPI Flash
+
+The test source was developed in the MPLAB X IDE and can be found [here](Code), but the diagram that follows describes the high-level execution flow. The FT230 to ATTiny416 serial receive functionality was verified in bring-up test code that was not included in this repository.
+
 ```mermaid
 flowchart LR
     Z["Wait forever until reset (Infinite Loop)."]
@@ -98,11 +106,34 @@ flowchart LR
     C --> |NO| E{Erase Flash Command Asserted?}
     E --> |YES| F[Erase Flash and notify when erase is complete over UART.]
     F --> Z
-    E --> |NO| G{Is storage remaining in FLASH?}
-    G --> |YES| H[Write data pattern to flash.]
+    E --> |NO| G{Is storage remaining in Flash?}
+    G --> |YES| H[Write data pattern to Flash.]
     H --> G
     G --> |NO| Z
 ```
+
+The external commands to export and erase SPI Flash were implemented using two ATTiny416 GPIO interfaces:
+
+- PA6 = ERASE_N
+- PA7 = DUMP_N
+
+The ATTiny416's internal pull-up resistors were enabled for the dump and erase pin (PA6 & PA7). The software then uses inverted logic at initialization when interpreting these pins to decide when to erase and dump Flash.
+
+To erase Flash, an operator would:
+
+1. Connect PA6 to GND
+2. Reset the ATTiny416
+3. UART interface can be monitored for software indication of erase completion.
+
+Similarly, to dump Flash, an operator would:
+
+1. Connect PA7 to GND
+2. Reset the ATTiny416
+3. Receive the contents of Flash over the UART interface.
+
+The dump Flash command is given priority over the erase Flash command, so if both are ever asserted at the same time, the ATTiny416 will dump the contents of Flash instead of erasing.
+
+These command interfaces are only interrogated by software during initialization. If neither are asserted when the microcontroller is released from reset, the normal Flash recording loop will be entered. Inverted logic is used for these interfaces to protect the ATTiny416 from expected behavior caused by applying voltage to GPIO pins while no power is applied ot the microcontroller itself.
 
 ### Software Testing Results
 
