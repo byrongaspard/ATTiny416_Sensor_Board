@@ -194,4 +194,3 @@ This project was a lot of fun and gave me a lot more confidence with the PCB lay
 The following can still be completed on this project:
 
 - Test the external 32kHz crystal oscillator
-- Add overcurrent protection to 30V input
