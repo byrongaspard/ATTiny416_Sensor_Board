@@ -46,7 +46,7 @@ The simplest way to OR multiple power sources while precluding backfeeding of po
 
 Therefore, an ideal diode circuit was designed to provide a smaller voltage drop when switching in the 5V USB input, while a regular diode was used to switch in the 30V input.
 The DZDH0401DW P-Channel ideal diode controller was chosen primarily because of cost. An N-Channel ideal diode controller would have provided an even smaller voltage drop, but the design did not require this.
-The DMP6110SVT was selected as the P-Channel FET primarily for it's relatively low R_DS(on) for a P-Channel FET of 130 mOhm. This R_DS(on) corresponds to a maximum voltage drop of 0.0065V across the FET at the maximum required 50mA output current (0.050A \* .130mOhm = 0.0065V). This results in a minimum LDO input voltage of ~4.34VDC when only 5V USB power is present, well above the 4.1V minimum required by the TPS7B6933.
+The DMP6110SVT was selected as the P-Channel FET primarily for it's relatively low R_DS(on) for a P-Channel FET of 130 mOhm. This R_DS(on) corresponds to a maximum voltage drop of 0.0065V across the FET at the maximum required 50mA output current (0.050A / 130mOhm = 0.0065V). This results in a minimum LDO input voltage of ~4.34VDC when only 5V USB power is present, well above the 4.1V minimum required by the TPS7B6933.
 
 The BAT160 was selected as the diode to switch the 30V input. A LTSpice model was created to tune the ideal diode controller's resistors and to verify circuit functionality before manufacturing. The two images that follow are of the SPICE model where both 5V (4.35V) USB and 30V input power are switched while the 3.3V output is measured.
 
@@ -187,7 +187,7 @@ The final image below shows the UART output when the erase flash command was ass
 
 # Summary
 
-This project was a lot of fun and gave me a lot more confidence with the PCB layout portions of hardware design. The layout requirements for this design were very simple as we didn't have ot contend with high power, high speed signals, noise, etc, but it was still a fun and rewarding learning experience for me.
+This project was a lot of fun and gave me a lot more confidence with the PCB layout portions of hardware design. The layout requirements for this design were very simple as we didn't have to contend with high-power, high-speed signals, noise, etc., but it was still a fun and rewarding learning experience for me.
 
 ## Additional Work
 
